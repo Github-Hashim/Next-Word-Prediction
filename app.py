@@ -27,35 +27,17 @@ def predict_next_word(model, tokenizer, text, max_sequence_len):
             return word
     return None
 
-# Add some custom CSS to beautify the UI
+# Add custom CSS for visibility
 st.markdown("""
     <style>
-        .main {
-            background-color: #f0f2f6;
-            padding: 2rem;
-            border-radius: 10px;
-        }
-        h1 {
-            color: #1f77b4;
-        }
-        .stTextInput input {
-            border: 2px solid #1f77b4;
-            border-radius: 10px;
-            padding: 10px;
-        }
-        .stButton button {
-            background-color: #1f77b4;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-        }
-        .stButton button:hover {
-            background-color: #145a86;
-        }
-        .stMarkdown h2 {
-            color: #1f77b4;
-        }
+    .predicted-word {
+        background-color: #e0f7fa;
+        color: #00796b;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -76,7 +58,7 @@ if st.button("Predict Next Word"):
     next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len)
     
     if next_word:
-        st.success(f"The predicted next word is: **{next_word}**")
+        st.markdown(f'<div class="predicted-word">The predicted next word is: <b>{next_word}</b></div>', unsafe_allow_html=True)
     else:
         st.error("Unable to predict the next word. Please try a different sequence.")
 
